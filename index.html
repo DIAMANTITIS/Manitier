@@ -21,29 +21,14 @@
         }
 
         .bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            pointer-events: none;
-            opacity: 0.55;
-            background: #0a0a1c;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2; pointer-events: none; opacity: 0.55; background: #0a0a1c;
         }
 
         .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% 50%, rgba(15,10,40,0.75) 0%, rgba(5,5,20,0.95) 100%);
-            z-index: -1;
-            pointer-events: none;
-            backdrop-filter: blur(1px);
-            -webkit-backdrop-filter: blur(1px);
+            z-index: -1; pointer-events: none; backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(1px);
         }
 
         .container { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
@@ -51,15 +36,10 @@
         header { text-align: center; padding: 50px 20px 30px; }
 
         .logo {
-            font-size: 3.5rem;
-            font-weight: 900;
-            letter-spacing: -1px;
+            font-size: 3.5rem; font-weight: 900; letter-spacing: -1px;
             background: linear-gradient(135deg, #d8b4fe, #f9a8d4, #fde047);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.5));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.5));
             animation: softGlow 3s ease-in-out infinite alternate;
         }
 
@@ -71,40 +51,24 @@
         .tagline { font-size: 0.85rem; color: #c4b5fd; letter-spacing: 4px; text-transform: uppercase; font-weight: 500; opacity: 0.85; }
 
         .ad-top {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            min-height: 60px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 16px;
-            backdrop-filter: blur(5px);
-            padding: 10px;
+            display: flex; justify-content: center; margin-bottom: 30px; min-height: 60px;
+            background: rgba(255,255,255,0.02); border-radius: 16px; backdrop-filter: blur(5px); padding: 10px;
         }
 
         .card {
-            background: rgba(20, 20, 50, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 44px;
-            padding: 45px 40px;
-            margin-bottom: 50px;
+            background: rgba(20, 20, 50, 0.25); border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 44px; padding: 45px 40px; margin-bottom: 50px;
             box-shadow: 0 25px 50px -15px rgba(0,0,0,0.8), 0 0 0 1px rgba(168,139,250,0.1) inset, 0 0 20px rgba(168,139,250,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;
         }
 
         .card::before {
-            content: "";
-            position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
-            border-radius: 45px;
-            padding: 1px;
+            content: ""; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: 45px; padding: 1px;
             background: linear-gradient(135deg, rgba(168,139,250,0.3), rgba(249,168,212,0.2), transparent, rgba(168,139,250,0.3));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
+            -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
         }
 
         .card:hover {
@@ -114,16 +78,12 @@
         }
 
         .job-header { text-align: center; margin-bottom: 40px; }
-
         .badge {
             display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(168,139,250,0.2); color: #e9d5ff;
-            padding: 9px 22px; border-radius: 50px;
+            background: rgba(168,139,250,0.2); color: #e9d5ff; padding: 9px 22px; border-radius: 50px;
             font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-            margin-bottom: 18px; border: 1px solid rgba(192,132,252,0.4);
-            box-shadow: 0 0 12px rgba(168,139,250,0.25);
+            margin-bottom: 18px; border: 1px solid rgba(192,132,252,0.4); box-shadow: 0 0 12px rgba(168,139,250,0.25);
         }
-
         .job-header h1 { font-size: 2.8rem; font-weight: 800; color: #fafafa; margin-bottom: 10px; letter-spacing: -0.6px; line-height: 1.2; text-shadow: 0 0 15px rgba(255,255,255,0.15); }
         .job-header .subtitle { font-size: 1.05rem; color: #d1d5db; max-width: 600px; margin: 0 auto; }
 
@@ -133,23 +93,17 @@
         .detail-item {
             background: rgba(255, 255, 255, 0.03); border-radius: 24px; padding: 22px 12px;
             text-align: center; border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.2s ease, background 0.2s, border-color 0.2s, box-shadow 0.2s;
-            will-change: transform;
+            transition: transform 0.2s ease, background 0.2s, border-color 0.2s, box-shadow 0.2s; will-change: transform;
         }
-
         .detail-item:hover {
             background: rgba(139, 92, 246, 0.15); border-color: rgba(192, 132, 252, 0.5);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 20px -10px rgba(0,0,0,0.5), 0 0 15px rgba(168,139,250,0.3);
+            transform: translateY(-3px); box-shadow: 0 15px 20px -10px rgba(0,0,0,0.5), 0 0 15px rgba(168,139,250,0.3);
         }
-
         .detail-item .icon-circle {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 48px; height: 48px; border-radius: 50%;
-            background: rgba(139, 92, 246, 0.25); margin-bottom: 10px; font-size: 1.5rem;
-            box-shadow: 0 0 10px rgba(168,139,250,0.3); transition: box-shadow 0.2s;
+            width: 48px; height: 48px; border-radius: 50%; background: rgba(139, 92, 246, 0.25);
+            margin-bottom: 10px; font-size: 1.5rem; box-shadow: 0 0 10px rgba(168,139,250,0.3); transition: box-shadow 0.2s;
         }
-
         .detail-item:hover .icon-circle { box-shadow: 0 0 18px rgba(192,132,252,0.6); }
         .detail-item .label { font-size: 0.7rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .detail-item .value { font-size: 1rem; font-weight: 700; color: #f1f5f9; }
@@ -202,59 +156,40 @@
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
         @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } .card { padding: 30px 18px; border-radius: 34px; } .job-header h1 { font-size: 2.1rem; } .logo { font-size: 2.6rem; } }
 
-        .submit-btn {
-            width: 100%; padding: 17px 24px; background: linear-gradient(135deg, #6d28d9, #a78bfa);
-            border: none; border-radius: 16px; color: #fff; font-size: 1.05rem; font-weight: 700;
-            cursor: pointer; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 20px;
-            position: relative; overflow: hidden;
-            box-shadow: 0 10px 22px -5px rgba(139, 92, 246, 0.5), 0 0 0 1px rgba(255,255,255,0.1) inset;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
-            will-change: transform;
+        .buttons-row { display: flex; gap: 15px; margin-top: 25px; }
+        .btn {
+            padding: 15px 30px; border-radius: 16px; font-weight: 700; font-size: 1rem; cursor: pointer;
+            border: none; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.5px;
         }
-
-        .submit-btn::after {
-            content: ""; position: absolute; top: 0; left: -75%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-            transform: skewX(-20deg); transition: left 0.5s;
+        .btn-primary {
+            background: linear-gradient(135deg, #6d28d9, #a78bfa); color: #fff;
+            box-shadow: 0 10px 22px -5px rgba(139, 92, 246, 0.5); flex: 1;
         }
-
-        .submit-btn:hover::after { left: 120%; }
-        .submit-btn:hover {
-            background: linear-gradient(135deg, #7c3aed, #c4b5fd);
-            box-shadow: 0 12px 28px -5px rgba(168,139,250,0.7), 0 0 0 1px rgba(255,255,255,0.2) inset;
-            transform: translateY(-1px);
+        .btn-primary:hover { background: linear-gradient(135deg, #7c3aed, #c4b5fd); box-shadow: 0 12px 28px -5px rgba(168,139,250,0.7); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.05); color: #c4b5fd; border: 1px solid rgba(192,132,252,0.3);
         }
-        .submit-btn:active { transform: scale(0.97); }
+        .btn-secondary:hover { background: rgba(139, 92, 246, 0.2); }
+        .btn:active { transform: scale(0.97); }
 
-        .success-message { display: none; text-align: center; padding: 45px 20px; animation: fadeInUp 0.5s ease; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .success-message .check-circle {
-            width: 85px; height: 85px; border-radius: 50%;
-            background: linear-gradient(135deg, #7c3aed, #c084fc);
-            display: inline-flex; align-items: center; justify-content: center;
-            font-size: 2.8rem; margin-bottom: 22px;
-            box-shadow: 0 15px 30px rgba(168,139,250,0.5);
-            animation: popIn 0.5s ease;
+        .step-indicator {
+            display: flex; justify-content: center; gap: 10px; margin-bottom: 25px;
         }
-        @keyframes popIn { 0% { transform: scale(0); } 80% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        .success-message h3 { font-size: 1.8rem; color: #fafafa; margin-bottom: 12px; font-weight: 700; }
-        .success-message p { color: #d1d5db; margin-bottom: 8px; }
-
-        .email-note {
-            background: rgba(139, 92, 246, 0.2); border-radius: 18px; padding: 14px 24px;
-            display: inline-block; margin-top: 14px; font-weight: 500; color: #e9d5ff;
-            border: 1px solid rgba(192, 132, 252, 0.5); box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .step-dot {
+            width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2);
+            transition: background 0.3s;
         }
+        .step-dot.active { background: #c084fc; box-shadow: 0 0 10px #c084fc; }
 
         .ad-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 20px 0;
-            background: rgba(255,255,255,0.01);
-            border-radius: 16px;
-            min-height: 60px;
+            display: flex; justify-content: center; align-items: center; margin: 20px 0;
+            background: rgba(255,255,255,0.01); border-radius: 16px; min-height: 60px;
+        }
+
+        .share-message {
+            text-align: center; padding: 20px;
+            background: rgba(139, 92, 246, 0.15); border-radius: 20px; margin: 20px 0;
+            border: 1px solid rgba(192,132,252,0.4);
         }
 
         footer { text-align: center; padding: 25px 20px; color: #6b7280; font-size: 0.85rem; position: relative; z-index: 2; }
@@ -263,32 +198,21 @@
 </head>
 <body>
 
-    <!-- Video de fondo -->
     <video class="bg-video" autoplay muted loop playsinline preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' fill='%230a0a1c'%3E%3Crect width='100%25' height='100%25'/%3E%3C/svg%3E">
         <source src="tecno.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
 
-    <!-- Música de fondo -->
     <audio id="bgMusic" loop preload="auto" volume="0.3" style="display:none;">
         <source src="tecno.mp3" type="audio/mpeg">
     </audio>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var bgMusic = document.getElementById('bgMusic');
             bgMusic.volume = 0.3;
-            function playMusic() {
-                bgMusic.play().then(() => {
-                    console.log('Música iniciada');
-                }).catch(e => {
-                    console.log('Autoplay bloqueado, esperando interacción');
-                });
-            }
+            function playMusic() { bgMusic.play().catch(() => {}); }
             playMusic();
-            document.body.addEventListener('click', function() {
-                bgMusic.play();
-            }, { once: true });
+            document.body.addEventListener('click', function() { bgMusic.play(); }, { once: true });
         });
     </script>
 
@@ -297,13 +221,7 @@
         <!-- Anuncio 1: Banner superior 728x90 -->
         <div class="ad-top">
             <script>
-                atOptions = {
-                    'key' : 'db169207c801f26e4d4dc0d9165490e6',
-                    'format' : 'iframe',
-                    'height' : 90,
-                    'width' : 728,
-                    'params' : {}
-                };
+                atOptions = { 'key' : 'db169207c801f26e4d4dc0d9165490e6', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
             </script>
             <script src="https://www.highperformanceformat.com/db169207c801f26e4d4dc0d9165490e6/invoke.js"></script>
         </div>
@@ -315,34 +233,16 @@
 
         <div class="card" id="formCard">
             <div class="job-header">
-                <div class="badge">
-                    <span>🌍</span> Remoto · Todos los países
-                </div>
+                <div class="badge"><span>🌍</span> Remoto · Todos los países</div>
                 <h1>Editor de Video Remoto</h1>
                 <p class="subtitle">Únete a un equipo global. Sin experiencia laboral previa requerida.</p>
             </div>
 
             <div class="details-grid">
-                <div class="detail-item">
-                    <div class="icon-circle">💻</div>
-                    <div class="label">Modalidad</div>
-                    <div class="value">100% Remoto</div>
-                </div>
-                <div class="detail-item">
-                    <div class="icon-circle">💵</div>
-                    <div class="label">Salario Fijo</div>
-                    <div class="value">$550 USD / mes</div>
-                </div>
-                <div class="detail-item">
-                    <div class="icon-circle">⏰</div>
-                    <div class="label">Horario</div>
-                    <div class="value">Flexible</div>
-                </div>
-                <div class="detail-item">
-                    <div class="icon-circle">📅</div>
-                    <div class="label">Días Libres</div>
-                    <div class="value">10 días / año</div>
-                </div>
+                <div class="detail-item"><div class="icon-circle">💻</div><div class="label">Modalidad</div><div class="value">100% Remoto</div></div>
+                <div class="detail-item"><div class="icon-circle">💵</div><div class="label">Salario Fijo</div><div class="value">$550 USD / mes</div></div>
+                <div class="detail-item"><div class="icon-circle">⏰</div><div class="label">Horario</div><div class="value">Flexible</div></div>
+                <div class="detail-item"><div class="icon-circle">📅</div><div class="label">Días Libres</div><div class="value">10 días / año</div></div>
             </div>
 
             <div class="section">
@@ -379,138 +279,158 @@
             <!-- Anuncio 2: Intermedio 300x250 -->
             <div class="ad-container">
                 <script>
-                    atOptions = {
-                        'key' : '6421a476bfeefa8897c0fad68cd9c1c4',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
+                    atOptions = { 'key' : '6421a476bfeefa8897c0fad68cd9c1c4', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
                 </script>
                 <script src="https://www.highperformanceformat.com/6421a476bfeefa8897c0fad68cd9c1c4/invoke.js"></script>
             </div>
 
             <div class="divider"></div>
 
+            <!-- Formulario por pasos -->
             <div class="form-section" id="applicationForm">
                 <h2>📩 Postula Ahora</h2>
-                <p class="form-subtitle">Completa el formulario. Te responderemos en máximo 3 días hábiles.</p>
+                <p class="form-subtitle">Completa los pasos. Te responderemos en máximo 3 días hábiles.</p>
+
+                <!-- Indicador de paso -->
+                <div class="step-indicator" id="stepIndicator">
+                    <span class="step-dot active" data-step="1"></span>
+                    <span class="step-dot" data-step="2"></span>
+                    <span class="step-dot" data-step="3"></span>
+                    <span class="step-dot" data-step="4"></span>
+                </div>
 
                 <form id="postulaForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo <span class="required">*</span></label>
-                            <input type="text" id="nombre" name="nombre" placeholder="Ej: María García López" required>
+                    <!-- Paso 1: Datos personales -->
+                    <div class="form-step" id="step1">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo <span class="required">*</span></label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Ej: María García López" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pais">País de residencia <span class="required">*</span></label>
+                                <select id="pais" name="pais" required>
+                                    <option value="">Selecciona tu país</option>
+                                    <optgroup label="América Latina">
+                                        <option value="Argentina">Argentina</option><option value="Bolivia">Bolivia</option><option value="Brasil">Brasil</option><option value="Chile">Chile</option><option value="Colombia">Colombia</option><option value="Costa Rica">Costa Rica</option><option value="Cuba">Cuba</option><option value="Ecuador">Ecuador</option><option value="El Salvador">El Salvador</option><option value="Guatemala">Guatemala</option><option value="Honduras">Honduras</option><option value="México">México</option><option value="Nicaragua">Nicaragua</option><option value="Panamá">Panamá</option><option value="Paraguay">Paraguay</option><option value="Perú">Perú</option><option value="Puerto Rico">Puerto Rico</option><option value="República Dominicana">República Dominicana</option><option value="Uruguay">Uruguay</option><option value="Venezuela">Venezuela</option>
+                                    </optgroup>
+                                    <optgroup label="Europa">
+                                        <option value="España">España</option><option value="Portugal">Portugal</option><option value="Francia">Francia</option><option value="Alemania">Alemania</option><option value="Italia">Italia</option><option value="Reino Unido">Reino Unido</option><option value="Países Bajos">Países Bajos</option><option value="Suiza">Suiza</option><option value="Suecia">Suecia</option><option value="Noruega">Noruega</option><option value="Dinamarca">Dinamarca</option><option value="Finlandia">Finlandia</option><option value="Bélgica">Bélgica</option><option value="Austria">Austria</option><option value="Irlanda">Irlanda</option><option value="Polonia">Polonia</option><option value="Rumanía">Rumanía</option><option value="Grecia">Grecia</option><option value="República Checa">República Checa</option><option value="Hungría">Hungría</option>
+                                    </optgroup>
+                                    <optgroup label="Norteamérica">
+                                        <option value="Estados Unidos">Estados Unidos</option><option value="Canadá">Canadá</option>
+                                    </optgroup>
+                                    <optgroup label="Asia y Oceanía">
+                                        <option value="Japón">Japón</option><option value="Corea del Sur">Corea del Sur</option><option value="China">China</option><option value="India">India</option><option value="Australia">Australia</option><option value="Nueva Zelanda">Nueva Zelanda</option><option value="Singapur">Singapur</option><option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option><option value="Filipinas">Filipinas</option><option value="Indonesia">Indonesia</option><option value="Tailandia">Tailandia</option>
+                                    </optgroup>
+                                    <optgroup label="África">
+                                        <option value="Sudáfrica">Sudáfrica</option><option value="Nigeria">Nigeria</option><option value="Kenia">Kenia</option><option value="Marruecos">Marruecos</option><option value="Egipto">Egipto</option>
+                                    </optgroup>
+                                    <option value="Otro">Otro país</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="pais">País de residencia <span class="required">*</span></label>
-                            <select id="pais" name="pais" required>
-                                <option value="">Selecciona tu país</option>
-                                <optgroup label="América Latina">
-                                    <option value="Argentina">Argentina</option><option value="Bolivia">Bolivia</option><option value="Brasil">Brasil</option><option value="Chile">Chile</option><option value="Colombia">Colombia</option><option value="Costa Rica">Costa Rica</option><option value="Cuba">Cuba</option><option value="Ecuador">Ecuador</option><option value="El Salvador">El Salvador</option><option value="Guatemala">Guatemala</option><option value="Honduras">Honduras</option><option value="México">México</option><option value="Nicaragua">Nicaragua</option><option value="Panamá">Panamá</option><option value="Paraguay">Paraguay</option><option value="Perú">Perú</option><option value="Puerto Rico">Puerto Rico</option><option value="República Dominicana">República Dominicana</option><option value="Uruguay">Uruguay</option><option value="Venezuela">Venezuela</option>
-                                </optgroup>
-                                <optgroup label="Europa">
-                                    <option value="España">España</option><option value="Portugal">Portugal</option><option value="Francia">Francia</option><option value="Alemania">Alemania</option><option value="Italia">Italia</option><option value="Reino Unido">Reino Unido</option><option value="Países Bajos">Países Bajos</option><option value="Suiza">Suiza</option><option value="Suecia">Suecia</option><option value="Noruega">Noruega</option><option value="Dinamarca">Dinamarca</option><option value="Finlandia">Finlandia</option><option value="Bélgica">Bélgica</option><option value="Austria">Austria</option><option value="Irlanda">Irlanda</option><option value="Polonia">Polonia</option><option value="Rumanía">Rumanía</option><option value="Grecia">Grecia</option><option value="República Checa">República Checa</option><option value="Hungría">Hungría</option>
-                                </optgroup>
-                                <optgroup label="Norteamérica">
-                                    <option value="Estados Unidos">Estados Unidos</option><option value="Canadá">Canadá</option>
-                                </optgroup>
-                                <optgroup label="Asia y Oceanía">
-                                    <option value="Japón">Japón</option><option value="Corea del Sur">Corea del Sur</option><option value="China">China</option><option value="India">India</option><option value="Australia">Australia</option><option value="Nueva Zelanda">Nueva Zelanda</option><option value="Singapur">Singapur</option><option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option><option value="Filipinas">Filipinas</option><option value="Indonesia">Indonesia</option><option value="Tailandia">Tailandia</option>
-                                </optgroup>
-                                <optgroup label="África">
-                                    <option value="Sudáfrica">Sudáfrica</option><option value="Nigeria">Nigeria</option><option value="Kenia">Kenia</option><option value="Marruecos">Marruecos</option><option value="Egipto">Egipto</option>
-                                </optgroup>
-                                <option value="Otro">Otro país</option>
+                            <label for="email">Correo electrónico <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                        </div>
+                        <div class="buttons-row">
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Siguiente →</button>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Habilidades -->
+                    <div class="form-step" id="step2" style="display:none;">
+                        <div class="form-group">
+                            <label for="herramientas">¿Qué programas de edición usas? <span class="required">*</span></label>
+                            <input type="text" id="herramientas" name="herramientas" placeholder="Ej: CapCut, Premiere Pro, DaVinci Resolve, Filmora..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nivel">Nivel de experiencia <span class="required">*</span></label>
+                            <select id="nivel" name="nivel" required>
+                                <option value="">Selecciona tu nivel</option>
+                                <option value="basico">Básico - Edito por hobby o aprendí con tutoriales</option>
+                                <option value="intermedio">Intermedio - He hecho videos para proyectos personales</option>
+                                <option value="avanzado">Avanzado - Tengo experiencia editando para clientes</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="videos">Enlaces a videos que hayas editado (mínimo 1) <span class="required">*</span></label>
+                            <textarea id="videos" name="videos" placeholder="Pega aquí los enlaces (YouTube, TikTok, Drive, etc.)&#10;Ej: https://youtube.com/...&#10;     https://drive.google.com/..." required></textarea>
+                            <small style="color: #9ca3af; font-size: 0.8rem;">Pueden ser videos personales, ejercicios o trabajos reales.</small>
+                        </div>
+                        <div class="buttons-row">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(1)">← Atrás</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Siguiente →</button>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Correo electrónico <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                    <!-- Paso 3: Motivación -->
+                    <div class="form-step" id="step3" style="display:none;">
+                        <div class="form-group">
+                            <label for="motivacion">Cuéntanos por qué te interesa este puesto <span class="required">*</span></label>
+                            <textarea id="motivacion" name="motivacion" placeholder="Cuéntanos en pocas líneas qué te motiva a postular..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="disponibilidad">Disponibilidad <span class="required">*</span></label>
+                            <select id="disponibilidad" name="disponibilidad" required>
+                                <option value="">Selecciona tu disponibilidad</option>
+                                <option value="completa">Jornada completa (40h/semana)</option>
+                                <option value="media">Media jornada (20h/semana)</option>
+                                <option value="ambas">Ambas opciones</option>
+                            </select>
+                        </div>
+                        <div class="buttons-row">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(2)">← Atrás</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(4)">Siguiente →</button>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="herramientas">¿Qué programas de edición usas? <span class="required">*</span></label>
-                        <input type="text" id="herramientas" name="herramientas" placeholder="Ej: CapCut, Premiere Pro, DaVinci Resolve, Filmora..." required>
+                    <!-- Paso 4: Compartir y enviar -->
+                    <div class="form-step" id="step4" style="display:none;">
+                        <div class="share-message">
+                            <p style="font-size: 1.2rem; font-weight: 600; margin-bottom: 10px;">🚀 ¡Último paso!</p>
+                            <p>Para finalizar tu postulación, comparte esta oportunidad en <strong>2 grupos de WhatsApp o Telegram</strong> y luego presiona "Enviar".</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px;">(Así más personas podrán aprovechar esta oferta)</p>
+                            <button type="button" class="btn btn-primary" style="margin: 15px 0; width: auto;" onclick="compartir()">
+                                📤 Compartir en 2 grupos
+                            </button>
+                            <p id="shareStatus" style="font-size: 0.9rem; color: #c4b5fd;"></p>
+                        </div>
+                        <div class="buttons-row">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(3)">← Atrás</button>
+                            <button type="button" class="btn btn-primary" id="submitFinalBtn" disabled onclick="enviarFormulario()">
+                                ✉️ Enviar Postulación
+                            </button>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label for="nivel">Nivel de experiencia <span class="required">*</span></label>
-                        <select id="nivel" name="nivel" required>
-                            <option value="">Selecciona tu nivel</option>
-                            <option value="basico">Básico - Edito por hobby o aprendí con tutoriales</option>
-                            <option value="intermedio">Intermedio - He hecho videos para proyectos personales</option>
-                            <option value="avanzado">Avanzado - Tengo experiencia editando para clientes</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="videos">Enlaces a videos que hayas editado (mínimo 1) <span class="required">*</span></label>
-                        <textarea id="videos" name="videos" placeholder="Pega aquí los enlaces (YouTube, TikTok, Drive, etc.)&#10;Ej: https://youtube.com/...&#10;     https://drive.google.com/..." required></textarea>
-                        <small style="color: #9ca3af; font-size: 0.8rem;">Pueden ser videos personales, ejercicios o trabajos reales.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="motivacion">Cuéntanos por qué te interesa este puesto <span class="required">*</span></label>
-                        <textarea id="motivacion" name="motivacion" placeholder="Cuéntanos en pocas líneas qué te motiva a postular..." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="disponibilidad">Disponibilidad <span class="required">*</span></label>
-                        <select id="disponibilidad" name="disponibilidad" required>
-                            <option value="">Selecciona tu disponibilidad</option>
-                            <option value="completa">Jornada completa (40h/semana)</option>
-                            <option value="media">Media jornada (20h/semana)</option>
-                            <option value="ambas">Ambas opciones</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        ✉️ Enviar Postulación
-                    </button>
                 </form>
 
+                <!-- Mensaje de éxito (oculto hasta envío final) -->
                 <div class="success-message" id="successMessage">
                     <div class="check-circle">✓</div>
                     <h3>¡Postulación enviada con éxito!</h3>
                     <p>Gracias por tu interés. Nuestro equipo revisará tu perfil y te responderá en un máximo de 3 días hábiles.</p>
-                    <div class="email-note">
-                        📬 Te avisaremos a tu correo electrónico. Revisa también la bandeja de spam.
-                    </div>
+                    <div class="email-note">📬 Te avisaremos a tu correo electrónico. Revisa también la bandeja de spam.</div>
                 </div>
             </div>
 
             <!-- Anuncio 3: Inferior dentro de la tarjeta 468x60 -->
             <div class="ad-container" style="margin-top: 30px;">
                 <script>
-                    atOptions = {
-                        'key' : '01a755a09cf1756ecf6577e5925f7d56',
-                        'format' : 'iframe',
-                        'height' : 60,
-                        'width' : 468,
-                        'params' : {}
-                    };
+                    atOptions = { 'key' : '01a755a09cf1756ecf6577e5925f7d56', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
                 </script>
                 <script src="https://www.highperformanceformat.com/01a755a09cf1756ecf6577e5925f7d56/invoke.js"></script>
             </div>
-
         </div>
 
         <!-- Anuncio 4: Contenedor específico de Adsterra -->
         <div id="container-9b7d8ad550a64cf55e18677cc7b73011" style="margin: 20px auto; text-align: center;"></div>
 
-        <!-- Anuncio 5: Lateral flotante 160x600 (solo escritorio) -->
+        <!-- Anuncio 5: Lateral izquierdo flotante 160x600 (solo escritorio) -->
         <div style="position: fixed; left: 10px; top: 50%; transform: translateY(-50%); z-index: 999; display: none;" class="ad-left-desktop">
             <script>
-                atOptions = {
-                    'key' : '65e7e7ddce4fe83b45d910aa801d7652',
-                    'format' : 'iframe',
-                    'height' : 600,
-                    'width' : 160,
-                    'params' : {}
-                };
+                atOptions = { 'key' : '65e7e7ddce4fe83b45d910aa801d7652', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
             </script>
             <script src="https://www.highperformanceformat.com/65e7e7ddce4fe83b45d910aa801d7652/invoke.js"></script>
         </div>
@@ -518,13 +438,7 @@
         <!-- Anuncio 6: Lateral derecho 160x300 (solo escritorio) -->
         <div style="position: fixed; right: 10px; top: 50%; transform: translateY(-50%); z-index: 999; display: none;" class="ad-right-desktop">
             <script>
-                atOptions = {
-                    'key' : '06307f29574bbb21e504607c878c4746',
-                    'format' : 'iframe',
-                    'height' : 300,
-                    'width' : 160,
-                    'params' : {}
-                };
+                atOptions = { 'key' : '06307f29574bbb21e504607c878c4746', 'format' : 'iframe', 'height' : 300, 'width' : 160, 'params' : {} };
             </script>
             <script src="https://www.highperformanceformat.com/06307f29574bbb21e504607c878c4746/invoke.js"></script>
         </div>
@@ -532,13 +446,7 @@
         <!-- Anuncio 7: Banner inferior flotante 320x50 -->
         <div style="position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 999; background: rgba(0,0,0,0.7); padding: 5px; border-radius: 8px 8px 0 0;">
             <script>
-                atOptions = {
-                    'key' : '9ed5286ef3d21e97041a76f782b0df82',
-                    'format' : 'iframe',
-                    'height' : 50,
-                    'width' : 320,
-                    'params' : {}
-                };
+                atOptions = { 'key' : '9ed5286ef3d21e97041a76f782b0df82', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
             </script>
             <script src="https://www.highperformanceformat.com/9ed5286ef3d21e97041a76f782b0df82/invoke.js"></script>
         </div>
@@ -546,68 +454,145 @@
         <footer>
             <p>© 2026 Impulso Digital — Agencia de Marketing de Contenidos</p>
         </footer>
-
     </div>
 
     <!-- Scripts de anuncios asíncronos -->
     <script src="https://pl29286174.profitablecpmratenetwork.com/bd/f8/85/bdf8855c311f1a638115cab547698ac9.js"></script>
     <script src="https://pl29286175.profitablecpmratenetwork.com/e0/5e/ef/e05eefa18c2e54315508df7373548d9f.js"></script>
     <script async="async" data-cfasync="false" src="https://pl29286176.profitablecpmratenetwork.com/9b7d8ad550a64cf55e18677cc7b73011/invoke.js"></script>
-
-    <!-- Anuncio adicional (enlace xm2869ai) -->
     <script src="https://www.profitablecpmratenetwork.com/xm2869ai?key=8ad14e1d6b0827f8da20e512e50e429d"></script>
 
-    <!-- Scripts de validación del formulario y control de anuncios laterales -->
+    <!-- Lógica de pasos, compartir y envío -->
     <script>
-        // Mostrar anuncios laterales solo en escritorio (ancho > 1200px)
+        let currentStep = 1;
+        let hasShared = false;
+
+        // Mostrar/ocultar pasos y actualizar indicador
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.style.display = 'none');
+            document.getElementById('step' + step).style.display = 'block';
+            document.querySelectorAll('.step-dot').forEach(dot => dot.classList.remove('active'));
+            document.querySelector('.step-dot[data-step="' + step + '"]').classList.add('active');
+            currentStep = step;
+            window.scrollTo({ top: document.getElementById('applicationForm').offsetTop - 50, behavior: 'smooth' });
+        }
+
+        function nextStep(step) {
+            if (validateStep(currentStep)) {
+                showStep(step);
+            }
+        }
+
+        function prevStep(step) {
+            showStep(step);
+        }
+
+        function validateStep(step) {
+            if (step === 1) {
+                const nombre = document.getElementById('nombre').value.trim();
+                const pais = document.getElementById('pais').value;
+                const email = document.getElementById('email').value.trim();
+                if (!nombre || !pais || !email) {
+                    alert('Completa todos los campos obligatorios.');
+                    return false;
+                }
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert('Ingresa un correo electrónico válido.');
+                    return false;
+                }
+                return true;
+            } else if (step === 2) {
+                const herramientas = document.getElementById('herramientas').value.trim();
+                const nivel = document.getElementById('nivel').value;
+                const videos = document.getElementById('videos').value.trim();
+                if (!herramientas || !nivel || !videos) {
+                    alert('Completa todos los campos.');
+                    return false;
+                }
+                if (videos.length < 5) {
+                    alert('Pega al menos un enlace a un video editado.');
+                    return false;
+                }
+                return true;
+            } else if (step === 3) {
+                const motivacion = document.getElementById('motivacion').value.trim();
+                const disponibilidad = document.getElementById('disponibilidad').value;
+                if (!motivacion || !disponibilidad) {
+                    alert('Completa todos los campos.');
+                    return false;
+                }
+                return true;
+            }
+            return true;
+        }
+
+        // Función para compartir (simula compartir en 2 grupos)
+        function compartir() {
+            const shareText = '🚀 Encontré esta oportunidad de trabajo remoto como Editor de Video. ¡Sin experiencia previa! Postúlate aquí: ' + window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Oportunidad de trabajo',
+                    text: shareText,
+                }).then(() => {
+                    // Después de compartir una vez, pedimos que comparta una segunda vez
+                    alert('¡Compartido! Ahora comparte en otro grupo más para habilitar el envío.');
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Oportunidad de trabajo',
+                            text: shareText,
+                        }).then(() => {
+                            document.getElementById('shareStatus').innerText = '✅ Compartido en 2 grupos. Ya puedes enviar.';
+                            document.getElementById('submitFinalBtn').disabled = false;
+                            hasShared = true;
+                        }).catch(() => {
+                            // Si cancela, igual habilitamos después de dos intentos
+                            document.getElementById('shareStatus').innerText = '✅ Completa el segundo compartir manualmente y presiona Enviar.';
+                            document.getElementById('submitFinalBtn').disabled = false;
+                            hasShared = true;
+                        });
+                    } else {
+                        document.getElementById('shareStatus').innerText = '✅ Compartido. Ya puedes enviar.';
+                        document.getElementById('submitFinalBtn').disabled = false;
+                        hasShared = true;
+                    }
+                }).catch(() => {
+                    alert('Para continuar, comparte manualmente en 2 grupos y luego presiona Enviar.');
+                    document.getElementById('shareStatus').innerText = '⚠️ Comparte manualmente en 2 grupos para habilitar el envío.';
+                    // Habilitamos de todos modos después de aceptar
+                    document.getElementById('submitFinalBtn').disabled = false;
+                    hasShared = true;
+                });
+            } else {
+                // Navegador no soporta Web Share, simulamos con alertas
+                alert('Copia este enlace y compártelo en 2 grupos de WhatsApp/Telegram:\n\n' + shareText);
+                alert('Una vez compartido, presiona Enviar.');
+                document.getElementById('shareStatus').innerText = '✅ Comparte manualmente y luego presiona Enviar.';
+                document.getElementById('submitFinalBtn').disabled = false;
+                hasShared = true;
+            }
+        }
+
+        function enviarFormulario() {
+            if (!hasShared) {
+                alert('Primero comparte en 2 grupos para confirmar tu postulación.');
+                return;
+            }
+            // Simular envío
+            const btn = document.getElementById('submitFinalBtn');
+            btn.textContent = '⏳ Enviando...';
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('applicationForm').innerHTML = ''; // Limpiar formulario
+                document.getElementById('successMessage').style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500);
+        }
+
+        // Mostrar anuncios laterales solo en escritorio
         if (window.innerWidth > 1200) {
             document.querySelector('.ad-left-desktop').style.display = 'block';
             document.querySelector('.ad-right-desktop').style.display = 'block';
         }
-
-        // Validación del formulario
-        document.getElementById('postulaForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const nombre = document.getElementById('nombre').value.trim();
-            const pais = document.getElementById('pais').value;
-            const email = document.getElementById('email').value.trim();
-            const herramientas = document.getElementById('herramientas').value.trim();
-            const nivel = document.getElementById('nivel').value;
-            const videos = document.getElementById('videos').value.trim();
-            const motivacion = document.getElementById('motivacion').value.trim();
-            const disponibilidad = document.getElementById('disponibilidad').value;
-
-            if (!nombre || !pais || !email || !herramientas || !nivel || !videos || !motivacion || !disponibilidad) {
-                alert('Completa todos los campos obligatorios.');
-                return;
-            }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('Ingresa un correo electrónico válido.');
-                return;
-            }
-            if (videos.length < 5) {
-                alert('Pega al menos un enlace a un video editado.');
-                return;
-            }
-
-            const btn = document.getElementById('submitBtn');
-            btn.textContent = '⏳ Enviando...';
-            btn.disabled = true;
-            btn.style.opacity = '0.7';
-
-            setTimeout(() => {
-                document.querySelector('#applicationForm form').style.display = 'none';
-                document.querySelector('#applicationForm .form-subtitle').style.display = 'none';
-                document.querySelector('#applicationForm h2').style.display = 'none';
-                const msg = document.getElementById('successMessage');
-                msg.style.display = 'block';
-                msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                btn.textContent = '✉️ Enviar Postulación';
-                btn.disabled = false;
-                btn.style.opacity = '1';
-            }, 1500);
-        });
     </script>
-
 </body>
 </html>
