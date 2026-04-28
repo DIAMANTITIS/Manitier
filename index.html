@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impulso Digital | Postula como Editor de Video Remoto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            background: #050510;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Video de fondo */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Overlay con gradiente y textura de ruido (simulada) */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(20,10,40,0.65) 0%, rgba(5,5,20,0.9) 100%),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.008) 2px, rgba(255,255,255,0.008) 4px);
+            backdrop-filter: blur(3px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Destellos flotantes animados (solo CSS) */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Generar múltiples partículas con diferentes retrasos */
+        .particle:nth-child(1) { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; animation-duration: 15s; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 40%; animation-duration: 18s; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 55%; animation-duration: 13s; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 70%; animation-duration: 16s; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 85%; animation-duration: 14s; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 15%; animation-duration: 17s; animation-delay: 6s; }
+        .particle:nth-child(8) { left: 60%; animation-duration: 19s; animation-delay: 0s; }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #d8b4fe, #f9a8d4, #fde047);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 25px rgba(216, 180, 254, 0.6));
+            animation: logoGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 15px rgba(216, 180, 254, 0.5)); }
+            100% { filter: drop-shadow(0 0 35px rgba(249, 168, 212, 0.8)); }
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #c4b5fd;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Tarjeta principal con borde de luz */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 48px;
+            padding: 50px 45px;
+            margin-bottom: 50px;
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.8), 
+                        0 0 0 1px rgba(168,139,250,0.1) inset,
+                        0 0 20px rgba(168,139,250,0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Efecto de brillo en el borde superior */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                rgba(168,139,250,0.3), 
+                rgba(249,168,212,0.2), 
+                rgba(253,224,71,0.1),
+                rgba(168,139,250,0.3));
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: borderRotate 8s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card:hover {
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: 0 30px 70px -20px rgba(168,139,250,0.3),
+                        0 0 0 1px rgba(168,139,250,0.2) inset,
+                        0 0 30px rgba(168,139,250,0.3);
+        }
+
+        .job-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(168,139,250,0.2);
+            color: #e9d5ff;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border: 1px solid rgba(192,132,252,0.4);
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 0.6s ease;
+            box-shadow: 0 0 15px rgba(168,139,250,0.3);
+        }
+
+        .job-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fafafa;
+            margin-bottom: 12px;
+            letter-spacing: -0.8px;
+            line-height: 1.15;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .job-header .subtitle {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Cuadrícula de detalles con efecto espejo */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 700px) {
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 28px;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all 0.35s ease;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-item::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .detail-item:hover::after {
+            opacity: 0.4;
+        }
+
+        .detail-item:hover {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(192, 132, 252, 0.5);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.6),
+                        0 0 20px rgba(168,139,250,0.25);
+        }
+
+        .detail-item .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.25);
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+            box-shadow: 0 0 15px rgba(168,139,250,0.3);
+            transition: box-shadow 0.3s;
+        }
+
+        .detail-item:hover .icon-circle {
+            box-shadow: 0 0 25px rgba(192,132,252,0.6);
+        }
+
+        .detail-item .label {
+            font-size: 0.7rem;
+            color: #c4b5fd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .detail-item .value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+
+        /* Secciones con listas */
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section h3 {
+            font-size: 1.25rem;
+            color: #e9d5ff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            text-shadow: 0 0 10px rgba(168,139,250,0.4);
+        }
+
+        .section h3 .section-icon {
+            font-size: 1.7rem;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section ul li {
+            padding: 12px 0 12px 36px;
+            position: relative;
+            color: #d1d5db;
+            font-size: 1rem;
+            font-weight: 400;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.2s;
+        }
+
+        .section ul li:hover {
+            color: #f3f4f6;
+            background: rgba(255,255,255,0.01);
+            padding-left: 40px;
+        }
+
+        .section ul li:last-child {
+            border-bottom: none;
+        }
+
+        .section ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 12px;
+            color: #a78bfa;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .divider::after {
+            content: "✨";
+            position: absolute;
+            left: 50%;
+            top: -12px;
+            transform: translateX(-50%);
+            background: rgba(5,5,20,0.8);
+            padding: 0 15px;
+            font-size: 1.2rem;
+            color: #a78bfa;
+        }
+
+        /* Formulario */
+        .form-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #fafafa;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .form-section .form-subtitle {
+            text-align: center;
+            color: #a5b4fc;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            letter-spacing: -0.2px;
+        }
+
+        .form-group label .required {
+            color: #f87171;
+            margin-left: 2px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2) inset;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #c084fc;
+            background: rgba(139, 92, 246, 0.12);
+            box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.25),
+                        0 4px 15px rgba(168,139,250,0.3) inset;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #6b7280;
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23a78bfa' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: #1e1b4b;
+            color: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                padding: 35px 20px;
+                border-radius: 36px;
+            }
+            .job-header h1 {
+                font-size: 2.2rem;
+            }
+            .logo {
+                font-size: 2.8rem;
+            }
+            .card::before {
+                border-radius: 38px;
+            }
+        }
+
+        /* Botón con destello */
+        .submit-btn {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #6d28d9, #a78bfa);
+            border: none;
+            border-radius: 18px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.6),
+                        0 0 0 1px rgba(255,255,255,0.1) inset;
+            text-transform: uppercase;
+        }
+
+        .submit-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #7c3aed, #c4b5fd);
+            box-shadow: 0 15px 35px -5px rgba(168,139,250,0.8),
+                        0 0 0 1px rgba(255,255,255,0.2) inset;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Mensaje de éxito */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .success-message .check-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7c3aed, #c084fc);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(168,139,250,0.5);
+            animation: popIn 0.5s ease;
+        }
+
+        .success-message h3 {
+            font-size: 1.9rem;
+            color: #fafafa;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        .success-message p {
+            color: #d1d5db;
+            margin-bottom: 10px;
+        }
+
+        .email-note {
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 20px;
+            padding: 16px 28px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 500;
+            color: #e9d5ff;
+            border: 1px solid rgba(192, 132, 252, 0.5);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #6b7280;
+            font-size: 0.85rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer p { opacity: 0.7; }
+        footer::before {
+            content: "⚡";
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fondo de video -->
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="tecno.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <!-- Partículas flotantes -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">Impulso Digital</div>
+            <p class="tagline">Agencia de Marketing de Contenidos</p>
+        </header>
+
+        <div class="card" id="formCard">
+            <div class="job-header">
+                <div class="badge">
+                    <span>🌍</span> Remoto · Todos los países
+                </div>
+                <h1>Editor de Video Remoto</h1>
+                <p class="subtitle">Únete a un equipo global. Sin experiencia laboral previa requerida.</p>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="icon-circle">💻</div>
+                    <div class="label">Modalidad</div>
+                    <div class="value">100% Remoto</div>
+                </div>
+                <div class="detail-item">
+                    <div class="icon-circle">💵</div>
+                    <div class="label">Salario Fijo</div>
+                    <div class="value">$550 USD / mes</div>
+                </div>
+                <div class="detail-item">
+                    <div class="icon-circle">⏰</div>
+                    <div class="label">Horario</div>
+                    <div class="value">Flexible</div>
+                </div>
+                <div class="detail-item">
+                    <div class="icon-circle">📅</div>
+                    <div class="label">Días Libres</div>
+                    <div class="value">10 días / año</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">🎯</span> ¿Qué harás?</h3>
+                <ul>
+                    <li>Editar videos para TikTok, Reels y YouTube Shorts.</li>
+                    <li>Agregar transiciones, textos, música y efectos.</li>
+                    <li>Colaborar con el equipo en ideas creativas.</li>
+                    <li>Participar en reuniones breves (máx. 2 por semana).</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">📋</span> ¿Qué buscamos?</h3>
+                <ul>
+                    <li>Manejo básico de CapCut, Premiere, DaVinci Resolve o similar.</li>
+                    <li>Buen ojo para el ritmo visual y formatos cortos.</li>
+                    <li>Organización y responsabilidad con los plazos.</li>
+                    <li>Ganas de aprender. No pedimos experiencia comprobable.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3><span class="section-icon">💼</span> ¿Qué ofrecemos?</h3>
+                <ul>
+                    <li>Contrato como prestador de servicios (válido en cualquier país).</li>
+                    <li>Pago puntual en USD el día 30 de cada mes.</li>
+                    <li>Reembolso del 50% en cursos de edición o diseño.</li>
+                    <li>Equipo pequeño, respetuoso y sin toxicidad.</li>
+                    <li>Estabilidad real. Buscamos relación a largo plazo.</li>
+                </ul>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-section" id="applicationForm">
+                <h2>📩 Postula Ahora</h2>
+                <p class="form-subtitle">Completa el formulario. Te responderemos en máximo 3 días hábiles.</p>
+
+                <form id="postulaForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo <span class="required">*</span></label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej: María García López" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pais">País de residencia <span class="required">*</span></label>
+                            <select id="pais" name="pais" required>
+                                <option value="">Selecciona tu país</option>
+                                <optgroup label="América Latina">
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Bolivia">Bolivia</option>
+                                    <option value="Brasil">Brasil</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Costa Rica">Costa Rica</option>
+                                    <option value="Cuba">Cuba</option>
+                                    <option value="Ecuador">Ecuador</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Guatemala">Guatemala</option>
+                                    <option value="Honduras">Honduras</option>
+                                    <option value="México">México</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Panamá">Panamá</option>
+                                    <option value="Paraguay">Paraguay</option>
+                                    <option value="Perú">Perú</option>
+                                    <option value="Puerto Rico">Puerto Rico</option>
+                                    <option value="República Dominicana">República Dominicana</option>
+                                    <option value="Uruguay">Uruguay</option>
+                                    <option value="Venezuela">Venezuela</option>
+                                </optgroup>
+                                <optgroup label="Europa">
+                                    <option value="España">España</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Francia">Francia</option>
+                                    <option value="Alemania">Alemania</option>
+                                    <option value="Italia">Italia</option>
+                                    <option value="Reino Unido">Reino Unido</option>
+                                    <option value="Países Bajos">Países Bajos</option>
+                                    <option value="Suiza">Suiza</option>
+                                    <option value="Suecia">Suecia</option>
+                                    <option value="Noruega">Noruega</option>
+                                    <option value="Dinamarca">Dinamarca</option>
+                                    <option value="Finlandia">Finlandia</option>
+                                    <option value="Bélgica">Bélgica</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Irlanda">Irlanda</option>
+                                    <option value="Polonia">Polonia</option>
+                                    <option value="Rumanía">Rumanía</option>
+                                    <option value="Grecia">Grecia</option>
+                                    <option value="República Checa">República Checa</option>
+                                    <option value="Hungría">Hungría</option>
+                                </optgroup>
+                                <optgroup label="Norteamérica">
+                                    <option value="Estados Unidos">Estados Unidos</option>
+                                    <option value="Canadá">Canadá</option>
+                                </optgroup>
+                                <optgroup label="Asia y Oceanía">
+                                    <option value="Japón">Japón</option>
+                                    <option value="Corea del Sur">Corea del Sur</option>
+                                    <option value="China">China</option>
+                                    <option value="India">India</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Nueva Zelanda">Nueva Zelanda</option>
+                                    <option value="Singapur">Singapur</option>
+                                    <option value="Emiratos Árabes Unidos">Emiratos Árabes Unidos</option>
+                                    <option value="Filipinas">Filipinas</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Tailandia">Tailandia</option>
+                                </optgroup>
+                                <optgroup label="África">
+                                    <option value="Sudáfrica">Sudáfrica</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="Kenia">Kenia</option>
+                                    <option value="Marruecos">Marruecos</option>
+                                    <option value="Egipto">Egipto</option>
+                                </optgroup>
+                                <option value="Otro">Otro país</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo electrónico <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="herramientas">¿Qué programas de edición usas? <span class="required">*</span></label>
+                        <input type="text" id="herramientas" name="herramientas" placeholder="Ej: CapCut, Premiere Pro, DaVinci Resolve, Filmora..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nivel">Nivel de experiencia <span class="required">*</span></label>
+                        <select id="nivel" name="nivel" required>
+                            <option value="">Selecciona tu nivel</option>
+                            <option value="basico">Básico - Edito por hobby o aprendí con tutoriales</option>
+                            <option value="intermedio">Intermedio - He hecho videos para proyectos personales</option>
+                            <option value="avanzado">Avanzado - Tengo experiencia editando para clientes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="videos">Enlaces a videos que hayas editado (mínimo 1) <span class="required">*</span></label>
+                        <textarea id="videos" name="videos" placeholder="Pega aquí los enlaces (YouTube, TikTok, Drive, etc.)&#10;Ej: https://youtube.com/...&#10;     https://drive.google.com/..." required></textarea>
+                        <small style="color: #9ca3af; font-size: 0.8rem;">Pueden ser videos personales, ejercicios o trabajos reales.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="motivacion">Cuéntanos por qué te interesa este puesto <span class="required">*</span></label>
+                        <textarea id="motivacion" name="motivacion" placeholder="Cuéntanos en pocas líneas qué te motiva a postular..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="disponibilidad">Disponibilidad <span class="required">*</span></label>
+                        <select id="disponibilidad" name="disponibilidad" required>
+                            <option value="">Selecciona tu disponibilidad</option>
+                            <option value="completa">Jornada completa (40h/semana)</option>
+                            <option value="media">Media jornada (20h/semana)</option>
+                            <option value="ambas">Ambas opciones</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        ✉️ Enviar Postulación
+                    </button>
+                </form>
+
+                <div class="success-message" id="successMessage">
+                    <div class="check-circle">✓</div>
+                    <h3>¡Postulación enviada con éxito!</h3>
+                    <p>Gracias por tu interés. Nuestro equipo revisará tu perfil y te responderá en un máximo de 3 días hábiles.</p>
+                    <div class="email-note">
+                        📬 Te avisaremos a tu correo electrónico. Revisa también la bandeja de spam.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 Impulso Digital — Agencia de Marketing de Contenidos</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('postulaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value.trim();
+            const pais = document.getElementById('pais').value;
+            const email = document.getElementById('email').value.trim();
+            const herramientas = document.getElementById('herramientas').value.trim();
+            const nivel = document.getElementById('nivel').value;
+            const videos = document.getElementById('videos').value.trim();
+            const motivacion = document.getElementById('motivacion').value.trim();
+            const disponibilidad = document.getElementById('disponibilidad').value;
+
+            if (!nombre || !pais || !email || !herramientas || !nivel || !videos || !motivacion || !disponibilidad) {
+                alert('Por favor, completa todos los campos obligatorios antes de enviar.');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, ingresa un correo electrónico válido.');
+                return;
+            }
+
+            if (videos.length < 5) {
+                alert('Por favor, pega al menos un enlace a un video que hayas editado.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.textContent = '⏳ Enviando...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+
+            setTimeout(function() {
+                document.querySelector('#applicationForm form').style.display = 'none';
+                document.querySelector('#applicationForm .form-subtitle').style.display = 'none';
+                document.querySelector('#applicationForm h2').style.display = 'none';
+
+                const success = document.getElementById('successMessage');
+                success.style.display = 'block';
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                submitBtn.textContent = '✉️ Enviar Postulación';
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
